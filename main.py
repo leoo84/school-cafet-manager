@@ -11,7 +11,7 @@ from functools import partial
 import json
 import sqlite3
 import shutil
-import openpyxl # type: ignore
+import openpyxl
 from time import sleep
 
 db = sqlite3.connect(directory + 'donnees.db')
