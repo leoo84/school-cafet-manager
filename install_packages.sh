@@ -1,6 +1,6 @@
 #!/bin/bash
 
-# Liste des packages à installer
+# List of packages to install
 PACKAGES=(
   build-essential
   libgirepository1.0-dev
@@ -15,38 +15,38 @@ PACKAGES=(
   python3.12-venv
 )
 
-# Vérifier les droits d'administration
+# Check administrative rights
 if [[ $EUID -ne 0 ]]; then
   echo "Ce script doit être exécuté avec les droits d'administration (sudo)."
   exit 1
 fi
 
-# Fonction pour installer des packages avec apt
+# Function to install packages with apt
 install_with_apt() {
   echo "Détection : Système basé sur Debian (apt)"
   apt update
   apt install -y "${PACKAGES[@]}"
 }
 
-# Fonction pour installer des packages avec dnf
+# Function to install packages with dnf
 install_with_dnf() {
   echo "Détection : Système basé sur Fedora/Red Hat (dnf)"
   dnf install -y "${PACKAGES[@]}"
 }
 
-# Fonction pour installer des packages avec yum
+# Function to install packages with yum
 install_with_yum() {
   echo "Détection : Système basé sur Red Hat/CentOS (yum)"
   yum install -y "${PACKAGES[@]}"
 }
 
-# Fonction pour installer des packages avec zypper
+# Function to install packages with zypper
 install_with_zypper() {
   echo "Détection : Système basé sur openSUSE (zypper)"
   zypper install -y "${PACKAGES[@]}"
 }
 
-# Détecter le gestionnaire de paquets et installer les packages
+# Detect package manager and install packages
 if command -v apt &> /dev/null; then
   install_with_apt
 elif command -v dnf &> /dev/null; then
